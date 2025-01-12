@@ -1,0 +1,79 @@
+# sim cfg
+data_path: .\examples\org # 字符串
+output_path: .\output # 字符串
+
+subMark: ernie  # 字符串
+simMark: Insula_L   # 字符串
+exampleIdx: 1 # int
+eeg-posi: EEG_10_10 # 字符串
+
+
+#####从这里开始，下面的参数，显示成两列
+
+# optimization cfg
+initialElecNum: 4   # int
+cur_max: 1.5    # float
+cur_min: 0.5    # float
+cur_sum: 2.0    # float
+precision: 0.01 # float
+
+# element type (tri, tet)
+type: tet  # 字符串
+thres: 0.2 # V/m
+
+nt: 0
+
+# Method: ['GeneticAlgorithm', 'ParticleSwarm']
+Method: GeneticAlgorithm # 字符串
+
+# GA cfg
+GA_para:
+    max_iter: 30    # int
+    pop_size: 50    # int
+    mut_prob: 0.3   # float
+    elit_ratio: 0.02    # float
+    cross_prob: 0.1 # float
+    parents_portion: 0.1    # float
+    cross_type: 'uniform'   # 字符串
+    time_threshold: 120     # int
+
+PSO_para:
+    para_1: 1.0   # float
+    para_2: 1.0   # float
+    para_3: 1.0  # float
+    para_4: 1.0   # float
+    para_5: 1.0  # float
+
+#####从这里结束，下面的参数，不用显示成两列了
+
+
+# (target)ROI cfg
+case: 1 # 这个参数通过切换 int
+case1:  
+    num: 1  # int
+    # name: ['dACC']
+    # coordMNI: [1, 18, 39]
+    name: ['Insula_L'] # 字符传列表
+    coordMNI: [[-34.24929, 2.41357, -9.37102]] # [[float, float, float]]
+    shape: ['sphere']   # 字符串列表
+    radius: [5] # float列表
+    intensity: -1.0   # float
+    otheralpha: -1.0  # float
+
+case2:
+    num: 2  # int
+    name: ['N_Acc_L', 'N_Acc_R']    # 字符串列表
+    coordMNI: [[1, 18, 39], [1, 18, 39]]    # [[float, float, float],...]
+    shape: ['AAL3', 'AAL3'] # 字符串列表
+    radius: [1.5, 1.5]  # float列表
+    intensity: 2.0    # float
+    otheralpha: 2.0   # float
+
+# avoid
+avoid:
+    num: 2  # int
+    name: ['l.dlPFC', 'r.dlPFC']    # 字符串列表
+    coordMNI: [[-44, 6, 33], [43, 9, 30]]    # [[float, float, float],...]
+    shape: ['sphere', 'sphere'] # 字符串列表
+    radius: [10, 10]    # float列表
+    coef: 1.0   # float

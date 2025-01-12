@@ -1,0 +1,7 @@
+*.msh
+*.opt
+
+/resources/
+/simnibs4_examples/
+/examples/
+/.vscode/

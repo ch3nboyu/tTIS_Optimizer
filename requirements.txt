@@ -1,0 +1,15 @@
+chardet==3.0.3
+cupy_cuda113==10.6.0
+geneticalgorithm==1.0.2
+gmsh==4.9.0
+h5py==3.6.0
+matplotlib==3.5.1
+numpy==1.22.0
+PyQt5==5.15.11
+PyQt5_sip==12.15.0
+PyYAML==6.0.2
+PyYAML==6.0.2
+scikit_opt==0.6.6
+scipy==1.9.3
+simnibs==4.1.0
+tqdm==4.66.5

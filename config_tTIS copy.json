@@ -1,0 +1,59 @@
+{
+    "data_path": ".\\examples\\org",
+    "output_path": ".\\output",
+    "subMark": "ernie",
+    "simMark": "Insula_L",
+    "exampleIdx": 1,
+    "eeg-posi": "EEG_10_10",
+    "initialElecNum": 4,
+    "cur_max": 1.5,
+    "cur_min": 0.5,
+    "cur_sum": 2.0,
+    "precision": 0.01,
+    "type": "tet",
+    "thres": 0.2,
+    "nt": 0,
+    "Method": "GeneticAlgorithm",
+    "GA_para": {
+        "max_iter": 30,
+        "pop_size": 50,
+        "mut_prob": 0.3,
+        "elit_ratio": 0.02,
+        "cross_prob": 0.1,
+        "parents_portion": 0.1
+    },
+    "PSO_para": {
+        "max_iter": 30,
+        "w_start": 1.0,
+        "w_end": 0.95,
+        "v_max": 2.0,
+        "v_min": -2.0
+    },
+    "case": 1,
+    "case1": {
+        "num": 1,
+        "name": ["Insula_L"],
+        "coordMNI": [[-34.24929, 2.41357, -9.37102]],
+        "shape": ["sphere"],
+        "radius": [4],
+        "intensity": -1.0,
+        "otheralpha": -1.0
+    },
+    "case2": {
+        "num": 2,
+        "name": ["N_Acc_L", "N_Acc_R"],
+        "coordMNI": [[1, 18, 39], [1, 18, 39]],
+        "shape": ["AAL3", "AAL3"],
+        "radius": [1.5, 1.5],
+        "intensity": 2.0,
+        "otheralpha": 2.0
+    },
+    "avoid":{
+        "num": 2,
+        "name": ["l.dlPFC", "r.dlPFC"],
+        "coordMNI": [[-44, 6, 33], [43, 9, 30]],
+        "shape": ["sphere", "sphere"],
+        "radius": [10, 10],
+        "coef": 1.0
+    }
+}

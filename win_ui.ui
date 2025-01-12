@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>926</width>
+    <height>705</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>tTIS Optimizer</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,2">
+    <item>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>331</width>
+         <height>1298</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QGroupBox" name="groupBox_4">
+             <property name="title">
+              <string>Path Parameter</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>data_path</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="data_path_edit"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>output_path</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="output_path_edit"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>subMark</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="subMark_edit"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>simMark</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="simMark_edit"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>exampleIdx</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="exampleIdx_edit"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>eeg-posi</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="eeg_posi_edit"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>initialElecNum</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>cur_max</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLineEdit" name="initialElecNum_edit"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="cur_max_edit"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>cur_min</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="label_52">
+               <property name="text">
+                <string>cur_sum</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLineEdit" name="cur_min_edit"/>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="cur_sum_edit"/>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_15">
+               <property name="text">
+                <string>precision</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLabel" name="label_53">
+               <property name="text">
+                <string>type</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLineEdit" name="precision_edit"/>
+             </item>
+             <item row="5" column="1">
+              <widget class="QComboBox" name="type_edit">
+               <item>
+                <property name="text">
+                 <string>tri</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>tet</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>thres</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>nt</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QLineEdit" name="thres_edit"/>
+             </item>
+             <item row="7" column="1">
+              <widget class="QLineEdit" name="nt_edit"/>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Method</string>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QComboBox" name="method_combo">
+               <item>
+                <property name="text">
+                 <string>GeneticAlgorithm</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ParticleSwarm</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTabWidget" name="tabWidget_2">
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="tab_3">
+              <attribute name="title">
+               <string>GA_para</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_7">
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="elit_ratio_edit"/>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_48">
+                 <property name="text">
+                  <string>max_iter</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="label_47">
+                 <property name="text">
+                  <string>cross_type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLineEdit" name="cross_prob_edit"/>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_58">
+                 <property name="text">
+                  <string>pop_size</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_49">
+                 <property name="text">
+                  <string>mut_prob</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_56">
+                 <property name="text">
+                  <string>elit_ratio</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLabel" name="label_57">
+                 <property name="text">
+                  <string>parents_portion</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLineEdit" name="parents_portion_edit"/>
+               </item>
+               <item row="6" column="1">
+                <widget class="QLabel" name="label_54">
+                 <property name="text">
+                  <string>time_threshold</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="pop_size_edit"/>
+               </item>
+               <item row="7" column="1">
+                <widget class="QLineEdit" name="time_threshold_edit"/>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLineEdit" name="mut_prob_edit"/>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_55">
+                 <property name="text">
+                  <string>cross_prob</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="0">
+                <widget class="QLineEdit" name="cross_type_edit"/>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLineEdit" name="max_iter_edit"/>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_4">
+              <attribute name="title">
+               <string>PSO_para</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_22">
+                 <property name="text">
+                  <string>para_1</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="label_23">
+                 <property name="text">
+                  <string>para_2</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLineEdit" name="para_1_edit"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="para_2_edit"/>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_44">
+                 <property name="text">
+                  <string>para_3</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="label_45">
+                 <property name="text">
+                  <string>para_4</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLineEdit" name="para_3_edit"/>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="para_4_edit"/>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_46">
+                 <property name="text">
+                  <string>para_5</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLineEdit" name="para_5_edit"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTabWidget" name="tabWidget_case">
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="tab">
+              <attribute name="title">
+               <string>case1</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="case1_num_edit"/>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="label_26">
+                 <property name="text">
+                  <string>otheralpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="case1_shape_edit"/>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="case1_coordMNI_edit"/>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLineEdit" name="case1_radius_edit"/>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_30">
+                 <property name="text">
+                  <string>shape</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLineEdit" name="case1_intensity_edit"/>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_29">
+                 <property name="text">
+                  <string>radius</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_27">
+                 <property name="text">
+                  <string>intensity</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_25">
+                 <property name="text">
+                  <string>num</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="QLineEdit" name="case1_otheralpha_edit"/>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="case1_name_edit"/>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_28">
+                 <property name="text">
+                  <string>coordMNI</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_17">
+                 <property name="text">
+                  <string>name</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_2">
+              <attribute name="title">
+               <string>case2</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_31">
+                 <property name="text">
+                  <string>num</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="case2_num_edit"/>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_36">
+                 <property name="text">
+                  <string>name</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="case2_name_edit"/>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_35">
+                 <property name="text">
+                  <string>coordMNI</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="case2_coordMNI_edit"/>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_37">
+                 <property name="text">
+                  <string>shape</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLineEdit" name="case2_shape_edit"/>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_33">
+                 <property name="text">
+                  <string>radius</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLineEdit" name="case2_radius_edit"/>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_32">
+                 <property name="text">
+                  <string>intensity</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="QLineEdit" name="case2_intensity_edit"/>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="label_34">
+                 <property name="text">
+                  <string>otheralpha</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="QLineEdit" name="case2_otheralpha_edit"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>avoid</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_42">
+                <property name="text">
+                 <string>num</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="avoid_num_edit"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_39">
+                <property name="text">
+                 <string>name</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="avoid_name_edit"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_38">
+                <property name="text">
+                 <string>coordMNI</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="avoid_coordMNI_edit"/>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_40">
+                <property name="text">
+                 <string>shape</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="avoid_shape_edit"/>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_41">
+                <property name="text">
+                 <string>radius</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="avoid_radius_edit"/>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_43">
+                <property name="text">
+                 <string>coef</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="avoid_coef_edit"/>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="save_button">
+          <property name="text">
+           <string>Save Config</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="prepare_button">
+          <property name="text">
+           <string>Prepare</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="optimization_button">
+          <property name="text">
+           <string>Optimization</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="simulation_button">
+          <property name="text">
+           <string>Simulation</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="right_widget">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
