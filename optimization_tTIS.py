@@ -44,7 +44,6 @@ def _find_indexes(mesh, lf_type, indexes=None, positions=None, tissues=None, rad
 
     返回网格中节点/元素的索引，以及一个映射，表明新点是从原始点中的哪个点获取的。
     '''
-
     # 检查是否同时定义了positions和indexes，或者两者都未定义。如果是，则抛出错误。
     if (positions is not None) == (indexes is not None): # 负XOR操作
         raise ValueError('请定义positions或indexes，但不能同时定义两者')
@@ -93,15 +92,15 @@ def _find_indexes(mesh, lf_type, indexes=None, positions=None, tissues=None, rad
         in_radius = kdtree.query_ball_point(mesh_pos[indexes], radius)
         # 创建一个映射，表明每个新点是从原始点中的哪个点获取的。
         original = np.concatenate([(i,)*len(ir) for i, ir in enumerate(in_radius)])
-        # 去除重复的点，并返回唯一的索引和映射。
+        # 去除重复的点，并返回唯一的索引和映射
         in_radius, uq_idx = np.unique(np.concatenate(in_radius), return_index=True)
         return mesh_indexes[in_radius], original[uq_idx]
     else:
         # 如果radius很小或为0，则直接返回最近的点的索引和映射。
         return mesh_indexes[indexes],  np.arange(len(indexes))
 
+
 def _find_directions(mesh, lf_type, directions, indexes, mapping=None):
-    # 如果directions为None，则返回None
     if directions is None:
         return None
 

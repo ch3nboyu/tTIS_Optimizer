@@ -1,5 +1,5 @@
 chardet==3.0.3
-cupy_cuda113==10.6.0
+# cupy_cuda113==10.6.0
 geneticalgorithm==1.0.2
 gmsh==4.9.0
 h5py==3.6.0
