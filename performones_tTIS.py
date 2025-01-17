@@ -16,13 +16,12 @@ import yaml
 import simnibs
 from simnibs import mesh_io
 import utils.TI_utils as TI
-import matplotlib.pyplot as plt
-import scipy.io as sio
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from utils.utils import find_positions_by_index, plot_elec, normalize_to_range
+
 
 
 
@@ -39,6 +38,8 @@ def performones(leadfield_hdf, mesh_path=None, electrodepair=None):
     data_path = cfg['data_path']
     workspace = os.path.dirname(data_path)
     m2m_path = os.path.join(workspace, 'm2m_ernie')
+    output_path = cfg['output_path']
+    os.makedirs(output_path, exist_ok=True)
 
     case = cfg['case']
 
@@ -88,13 +89,14 @@ def performones(leadfield_hdf, mesh_path=None, electrodepair=None):
     mout = mout.crop_mesh(nodes=rm_list_node, elements=rm_list_elm)
 
     print(f"[performones]INFO: end:{time.ctime()}, cost: {time.time()-startTime:.4f} seconds")
-    mesh_io.write_msh(mout,'TI_via_leadfields.msh')
-
+    save_path = os.path.join(output_path, 'TI_via_leadfields.msh')
+    mesh_io.write_msh(mout, save_path)
+    
     v = mout.view(visible_fields='TImax',)
-    v.write_opt('TI_via_leadfields.msh')
+    v.write_opt(save_path)
 
     print(f"[performones]INFO: end:{time.ctime()}, cost: {time.time()-startTime:.4f} seconds")
-    mesh_io.open_in_gmsh('TI_via_leadfields.msh', True)
+    mesh_io.open_in_gmsh(save_path, True)
     
 
 if __name__ == "__main__":
@@ -109,9 +111,10 @@ if __name__ == "__main__":
         cfg = json.load(file)
     
     data_path = cfg['data_path']
+    subMark = cfg['subMark']
     workspace = os.path.dirname(data_path)
     lf = 'leadfield_tet'
-    hdf_path = os.path.join(workspace, lf, 'ernie_leadfield_EEG10-10_UI_Jurak_2007.hdf5')
+    hdf_path = os.path.join(workspace, lf, f'{subMark}_leadfield_EEG10-10_UI_Jurak_2007.hdf5')
     
     performones(leadfield_hdf=hdf_path, electrodepair=[TIpair1, TIpair2])
     

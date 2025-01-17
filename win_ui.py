@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(926, 705)
+        MainWindow.resize(1000, 705)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(9)
@@ -427,8 +427,8 @@ class Ui_MainWindow(object):
         self.label_52.setText(_translate("MainWindow", "cur_sum"))
         self.label_15.setText(_translate("MainWindow", "precision"))
         self.label_53.setText(_translate("MainWindow", "type"))
-        self.type_edit.setItemText(0, _translate("MainWindow", "tri"))
-        self.type_edit.setItemText(1, _translate("MainWindow", "tet"))
+        self.type_edit.setItemText(0, _translate("MainWindow", "tet"))
+        self.type_edit.setItemText(1, _translate("MainWindow", "tri"))
         self.label_8.setText(_translate("MainWindow", "thres"))
         self.label_9.setText(_translate("MainWindow", "nt"))
         self.label_14.setText(_translate("MainWindow", "Method"))

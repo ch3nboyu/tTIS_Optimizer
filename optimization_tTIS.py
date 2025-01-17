@@ -1362,9 +1362,11 @@ def optimization(cfg=None):
     intensity = float(ROIcfg['intensity'])
 
     if type == 'tri':
-        opt.leadfield_hdf = f'.\examples\leadfield\{subMark}_leadfield_EEG10-10_UI_Jurak_2007.hdf5'
+        lf = 'leadfield'
     elif type == 'tet':
-        opt.leadfield_hdf = f'.\examples\leadfield_tet\{subMark}_leadfield_EEG10-10_UI_Jurak_2007.hdf5'
+        lf = 'leadfield_tet'
+
+    opt.leadfield_hdf = os.path.join(workspace, lf, f'{subMark}_leadfield_EEG10-10_UI_Jurak_2007.hdf5')
 
     # opt parameters set
     opt.max_total_current = max_total_current
