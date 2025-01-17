@@ -8,7 +8,6 @@ However, there has been a pressing challenge for finding optimal electrode combi
 
 In this study, the electrode combinations as well as the injected current for a two-electrode pair stimulation were optimized using a genetic algorithm(GA), considering the right hippocampus as the region of interest (ROI).
 
-
 ![1736698148765](images/README/1736698148765.png)
 
 ## 🔧 Dependencies and Installation
@@ -58,13 +57,13 @@ conda install -c conda-forge cupy
 │   ├── solveTIME.py
 │   └── utils.py
 └── examples
-    ├── leadfield    
+    ├── leadfield  
     ├── leadfield_tet
     ├── m2m_ernie    # Mesh
     └── org          # Example Dataset
 ```
 
-## ⚡ Quick Start
+## ⚡ Pipeline
 
 1. **Edit config\_tTIS.json**
 
@@ -118,7 +117,39 @@ python prepare_headandLF.py
 python optimization_tTIS.py
 ```
 
-4. **Simulation**
+and you can see the result:
+![1737094491366](images/README/1737094491366.png)
+
+4. **Visualization**
+
+```
+python performones_tTIS.py
+```
+
+![1736698148765](images/README/1736698148765.png)
+
+## 👀 Only simulation
+
+1. **Edit result.json**
+
+```
+{
+    "electrodes": [
+        "AF3",
+        "C3",
+        "P7",
+        "PO9"
+    ],
+    "currents": [
+        0.6,
+        -0.6,
+        1.34,
+        -1.34
+    ]
+}
+```
+
+2. **Visualization**
 
 ```
 python performones_tTIS.py

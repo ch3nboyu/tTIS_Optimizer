@@ -17,14 +17,10 @@ import simnibs
 from simnibs import mesh_io
 import utils.TI_utils as TI
 import matplotlib.pyplot as plt
-from matplotlib.collections import PatchCollection
-from matplotlib.patches import Circle, Rectangle
 import scipy.io as sio
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
 from tqdm import tqdm
 from utils.utils import find_positions_by_index, plot_elec, normalize_to_range
 
@@ -32,7 +28,6 @@ from utils.utils import find_positions_by_index, plot_elec, normalize_to_range
 
 def performones(leadfield_hdf, mesh_path=None, electrodepair=None):
     startTime = time.time()
-    
     leadfield, mesh, idx_lf = TI.load_leadfield(leadfield_hdf=leadfield_hdf)
     
     mout = copy.deepcopy(mesh)
@@ -73,10 +68,7 @@ def performones(leadfield_hdf, mesh_path=None, electrodepair=None):
     hlpvar = mesh_io.ElementData(cp.asnumpy(TImax), mesh=mout)
     # mout.add_element_field(hlpvar.norm(), 'TImax_ori')
     mout.add_element_field(hlpvar.norm(), 'TImax')
-
-    max_indices = np.argmax(cp.asnumpy(TImax), axis=0)
-    position = find_positions_by_index(mout, 'element', max_indices)[0]
-    print(f'position is : {position}')
+    # plot_elec(electrodepair)
 
     del ef1, ef2, TImax
     cp._default_memory_pool.free_all_blocks()
@@ -112,6 +104,14 @@ if __name__ == "__main__":
     TIpair1 = [result['electrodes'][0], result['electrodes'][1], result['currents'][0]]
     TIpair2 = [result['electrodes'][2], result['electrodes'][3], result['currents'][2]]
 
-    performones(leadfield_hdf='D:\ALL\projects\python\simNIBS\examples\leadfield_tet\ernie_leadfield_EEG10-10_UI_Jurak_2007.hdf5', 
-                    electrodepair=[TIpair1, TIpair2])
+    config_path = 'config_tTIS.json'
+    with open(config_path, 'r', encoding='utf-8') as file:
+        cfg = json.load(file)
+    
+    data_path = cfg['data_path']
+    workspace = os.path.dirname(data_path)
+    lf = 'leadfield_tet'
+    hdf_path = os.path.join(workspace, lf, 'ernie_leadfield_EEG10-10_UI_Jurak_2007.hdf5')
+    
+    performones(leadfield_hdf=hdf_path, electrodepair=[TIpair1, TIpair2])
     
