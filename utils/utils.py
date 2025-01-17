@@ -1,3 +1,8 @@
+"""
+@Author: boyu
+@Date:   2024-10-14 17:38:56
+"""
+
 import os
 import gc
 import h5py
@@ -8,6 +13,11 @@ import numpy as np
 import cupy as cp
 #import pandas as pd
 from simnibs.utils import TI_utils as TI
+import matplotlib.pyplot as plt
+from matplotlib.collections import PatchCollection
+from matplotlib.patches import Circle, Rectangle
+
+
 
 
 def load_cfg(cfg_path: str):
@@ -208,6 +218,91 @@ class electrode_Pos:
                         "CP6": 75,
                         "P6": 76}
 
+
+def normalize_to_range(data, new_min=-0.2, new_max=0.2):
+    """Normalize data to a specified range [new_min, new_max]."""
+    old_min, old_max = np.min(data), np.max(data)
+    return new_min + (data - old_min) * (new_max - new_min) / (old_max - old_min)
+
+
+def plotElec1010(U, grayMark):
+    pos = electrode_Pos()
+    elecXY, elecName = pos.id2pos, pos.id2elec  # 假设此函数已定义并返回电极坐标和名称
+
+    # 找到每个电极在绘图中的索引
+    elecFigureIdx = pos.elec2id
+    elec_pairs = []
+    for pair in U:
+        elec_pairs.append([elecFigureIdx[e] for e in pair['elecName']])
+
+    # 定义电极颜色
+    minCurrent, maxCurrent, stepCurrent = -2, 2, 0.05
+    current = np.arange(minCurrent, maxCurrent + stepCurrent, stepCurrent)
+    Ncolor = len(current)
+
+    if grayMark == 1:
+        colorMap = plt.cm.Greys(np.linspace(0, 1, Ncolor))  # 使用灰色调颜色图
+    else:
+        colorMap = plt.cm.Spectral(np.linspace(0, 1, Ncolor))  # 使用分隔型颜色图（例如红蓝对比）
+
+    # 线性插值以根据实际电流强度分配颜色
+    elec_color = []
+    for pair in U:
+        # 确保颜色为RGBA格式
+        colors = np.array([colorMap[int((cu - minCurrent) / stepCurrent)] for cu in pair['current']])
+        if colors.shape[1] == 3:
+            colors = np.hstack((colors, np.ones((colors.shape[0], 1))))  # 添加Alpha通道
+        elec_color.append(colors)
+
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.set_aspect('equal')
+    ax.axis('off')
+
+    # 绘制头部轮廓
+    lineWidHead, lineWidTarget, elec_r = 1, 2, 0.33
+
+    # 绘制头部圆圈和十字线
+    circle_5 = Circle((0, 0), 5, edgecolor='k', facecolor='none', linewidth=lineWidHead)
+    circle_4 = Circle((0, 0), 4, edgecolor='k', facecolor='none', linewidth=lineWidHead)
+    ax.add_patch(circle_5)
+    ax.add_patch(circle_4)
+    ax.plot([-5, 5], [0, 0], 'k-', lw=lineWidHead, zorder=1)
+    ax.plot([0, 0], [-5, 5], 'k-', lw=lineWidHead, zorder=1)
+    ax.plot([-0.5, 0], [np.sqrt(25-0.5**2), 5.5], 'k-', lw=lineWidHead, zorder=1)
+    ax.plot([0.5, 0], [np.sqrt(25-0.5**2), 5.5], 'k-', lw=lineWidHead, zorder=1)
+
+    # 绘制电极
+    elecIdxOther = set(range(1, len(elecName)+1)).difference(tuple(e) for e in elec_pairs)
+    for i in elecIdxOther:
+        ax.add_patch(Circle(elecXY[str(i)], elec_r, edgecolor='k', facecolor='w', linewidth=lineWidHead))
+        ax.text(elecXY[str(i)][0], elecXY[str(i)][1], elecName[i], ha='center', va='center', fontsize=7)
+
+    for i_pair, pair in enumerate(elec_pairs):
+        for i, idx in enumerate(pair):
+            ax.add_patch(Circle(elecXY[str(idx)], elec_r, edgecolor='k', facecolor=elec_color[i_pair][i], linewidth=lineWidTarget))
+            ax.text(elecXY[str(idx)][0], elecXY[str(idx)][1], elecName[idx], ha='center', va='center', fontsize=7)
+
+    # 添加颜色条
+    norm = plt.Normalize(minCurrent, maxCurrent)
+    sm = plt.cm.ScalarMappable(cmap=plt.cm.Spectral_r if not grayMark else plt.cm.Greys, norm=norm)
+    sm.set_array([])
+    plt.colorbar(sm, label='Current Intensity')
+
+    plt.show()
+
+
+def plot_elec(electrodepair):
+    U = []
+    for i in range(len(electrodepair)):
+        elecNum = 2
+        elecName = electrodepair[i][:2]
+        current = [electrodepair[i][2], -electrodepair[i][2]]
+        U.append(
+            {"elecNum": elecNum, "elecName": elecName, "current": current}
+        )
+    plotElec1010(U, 0)
+
+
 def modulation_envelope_gpu(e_field_1, e_field_2, nt=False):
     if not nt:
         envelope = cp.zeros(e_field_1.shape[0])
@@ -311,6 +406,37 @@ def readMatFile(fpath, kword):
     except:
         out = scipy.io.loadmat(fpath)[kword]
         return out
+
+
+
+def find_positions_by_index(mesh, lf_type, indexes):
+    '''
+    根据给定的索引在网格中查找节点或元素的位置。
+
+    参数:
+        mesh: 网格对象，包含节点和元素的信息。
+        lf_type: 字符串，指定查找的类型，可以是 'node'（节点）或 'element'（元素）。
+        indexes: 数组或列表，指定要查找的索引。
+
+    返回:
+        positions: 数组，包含与索引对应的节点或元素的位置。
+    '''
+    # 确保indexes是一个数组
+    indexes = np.atleast_1d(indexes)
+
+    if lf_type == 'node':
+        # 查找节点的位置
+        positions = mesh.nodes[indexes]
+    elif lf_type == 'element':
+        # 查找元素的质心位置
+        positions = mesh.elements_baricenters()[indexes]
+    else:
+        raise ValueError('lf_type必须是"node"或"element"')
+
+    return positions
+
+
+
 
 if __name__ == "__main__":
     npz_dir = 'directory of the NPZ model files'

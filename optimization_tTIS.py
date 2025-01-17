@@ -31,7 +31,7 @@ from simnibs.optimization import optimization_methods
 from utils.GA import objective_df
 from geneticalgorithm import geneticalgorithm as ga
 from utils.utils import readMatFile
-
+from utils.utils import plot_elec
 
 
 
@@ -40,7 +40,7 @@ def _find_indexes(mesh, lf_type, indexes=None, positions=None, tissues=None, rad
     在网格中查找满足以下条件之一的节点/元素：
     1. 在指定组织内，且位于一组给定点（由positions定义）的指定半径范围内的节点/元素。
        第一步是找到最近的节点/元素。
-    2. 特定的索引。
+    2. 特定的索引
 
     返回网格中节点/元素的索引，以及一个映射，表明新点是从原始点中的哪个点获取的。
     '''
@@ -104,34 +104,25 @@ def _find_directions(mesh, lf_type, directions, indexes, mapping=None):
     if directions is None:
         return None
 
-    # 如果directions为'normal'，则进行特殊处理
     if directions == 'normal':
-        # 如果mesh中存在四维元素，则不能定义法线方向
         if 4 in np.unique(mesh.elm.elm_type):
             return None
             # raise ValueError("Can't define a normal direction for volumetric data!")
 
-        # 根据lf_type选择节点法线或三角形法线
         if lf_type == 'node':
-            # 返回节点法线
             directions = -mesh.nodes_normals()[indexes]
         elif lf_type == 'element':
-            # 返回三角形法线
             directions = -mesh.triangle_normals()[indexes]
-        # 返回处理后的方向
         return directions
 
     else:
-        # 将directions转换为至少二维的数组
         directions = np.atleast_2d(directions)
 
-        # 如果directions的列数不为3，则抛出异常
         if directions.shape[1] != 3:
             raise ValueError(
                 "directions must be the string 'normal' or a Nx3 array"
             )
 
-        # 如果mapping为None，则根据indexes的长度生成映射
         if mapping is None:
             if len(directions) == len(indexes):
                 mapping = np.arange(len(indexes))
@@ -139,14 +130,11 @@ def _find_directions(mesh, lf_type, directions, indexes, mapping=None):
                 raise ValueError('Different number of indexes and directions and no '
                                  'mapping defined')
 
-        # 如果directions的长度为1，则生成全零的mapping
         elif len(directions) == 1:
             mapping = np.zeros(len(indexes), dtype=int)
 
-        # 对directions进行归一化处理
         directions = directions/np.linalg.norm(directions, axis=1)[:, None]
 
-        # 返回根据mapping索引后的方向
         return directions[mapping]
 
 
@@ -554,10 +542,17 @@ class tTIS_opt():
         
         sol = {'electrodes': electrodes, 'currents': currents}
         print(f"[optimize]INFO: solution: \n {sol}")
-        
+
         # save df_dict to json
         with open("result.json", "w") as json_file:
             json.dump(sol, json_file, indent=4)
+
+        electrodepair = [
+            [electrodes[0], electrodes[1], currents[0]],
+            [electrodes[2], electrodes[3], currents[2]]
+        ]
+        plot_elec(electrodepair)
+
 
         # Simple QP-style optimization
         # opt_problem = optimization_methods.TESLinearElecConstrained(
