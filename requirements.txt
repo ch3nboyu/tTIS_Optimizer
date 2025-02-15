@@ -1,11 +1,13 @@
 chardet==3.0.3
-# cupy_cuda113==10.6.0
+cupy_cuda113==10.6.0
+func_timeout==4.3.5
 geneticalgorithm==1.0.2
 h5py==3.6.0
 matplotlib==3.5.1
 numpy==1.22.0
 PyQt5==5.15.11
 PyQt5_sip==12.15.0
+PyQtWebEngine==5.15.7
 PyYAML==6.0.2
 PyYAML==6.0.2
 scikit_opt==0.6.6

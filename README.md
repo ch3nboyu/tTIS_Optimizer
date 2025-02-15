@@ -22,14 +22,16 @@ cd tTIS_Optimizer
 2. **Install dependent packages**
 
 ```
-conda env create simNIBS_environment_win.yml
+conda env create -f simNIBS_environment_win.yml
 conda activate simnibs_env
 pip install -f https://github.com/simnibs/simnibs/releases/latest simnibs
 pip install --upgrade pip
+(maybe u need pip install func_timeout==4.3.5)
 pip install -r requirements.txt
 ```
 
 3. **Install [cupy](https://docs.cupy.dev/en/stable/install.html#installing-cupy-from-pypi)**
+   the installation of CuPy can be complex, and u need to install it according to your CUDA version.
 
 ```
 conda install -c conda-forge cupy
@@ -155,3 +157,7 @@ python performones_tTIS.py
 python performones_tTIS.py
 ```
 
+## 📺More for visualization
+
+You can use "Tools -> Clipping" in Gmsh to observe your results in detail.
+![1739607562625](images/README/1739607562625.png)

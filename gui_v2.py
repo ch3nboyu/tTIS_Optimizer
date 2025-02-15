@@ -1712,19 +1712,19 @@ class Thread_performones_tTIS(QThread):
         del ef1, ef2, TImax
         cp._default_memory_pool.free_all_blocks()
 
-        rm_list_node = []
-        rm_list_elm = []
+        # rm_list_node = []
+        # rm_list_elm = []
 
-        for idx, coords in enumerate(mout.elm_node_coords()):
-            # remove elem in 2nd quadrant
-            if (coords[:, 0] > 0).any() and (coords[:, 1] < 0).any() and (coords[:, 2] < 20).any():
-                rm_list_elm.append(idx + 1)
+        # for idx, coords in enumerate(mout.elm_node_coords()):
+        #     # remove elem in 2nd quadrant
+        #     if (coords[:, 0] > 0).any() and (coords[:, 1] < 0).any() and (coords[:, 2] < 20).any():
+        #         rm_list_elm.append(idx + 1)
 
-        for idx, coord in enumerate(mout.nodes.node_coord):
-            if (coord[0] > 0) or (coord[1] < 0) or (coord[2] < 20):
-                rm_list_node.append(idx + 1)
+        # for idx, coord in enumerate(mout.nodes.node_coord):
+        #     if (coord[0] > 0) or (coord[1] < 0) or (coord[2] < 20):
+        #         rm_list_node.append(idx + 1)
 
-        mout = mout.crop_mesh(nodes=rm_list_node, elements=rm_list_elm)
+        # mout = mout.crop_mesh(nodes=rm_list_node, elements=rm_list_elm)
         self.progressBar_signal.emit(75)
 
         print(f"[performones]INFO: end:{time.ctime()}, cost: {time.time()-startTime:.4f} seconds")
@@ -1937,7 +1937,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             },
         }
-        with open('config_tTIS_test.json', 'w') as file:
+        with open('config_tTIS.json', 'w') as file:
             json.dump(config, file, indent=4)
         self.display_message('cfg saved')
 
